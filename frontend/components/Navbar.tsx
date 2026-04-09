@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useAuth } from "../lib/auth";
+import { useAuth } from "../lib/useAuth";
 
 export default function Navbar() {
   const pathname = usePathname();

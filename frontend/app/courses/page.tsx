@@ -1,7 +1,7 @@
 "use client";
 
 import ProtectedRoute from "../../components/ProtectedRoute";
-import { useAuth } from "../../lib/auth";
+import { useAuth } from "../../lib/useAuth";
 import Button from "../../components/Button";
 import { useRouter } from "next/navigation";
 

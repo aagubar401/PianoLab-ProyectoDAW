@@ -4,7 +4,7 @@ import ProtectedRoute from "../../../components/ProtectedRoute";
 import CourseAccordion from "../../../components/CourseAccordion";
 import UserVideoCard from "../../../components/UserVideoCard";
 import Button from "../../../components/Button";
-import { useAuth } from "../../../lib/auth";
+import { useAuth } from "../../../lib/useAuth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
