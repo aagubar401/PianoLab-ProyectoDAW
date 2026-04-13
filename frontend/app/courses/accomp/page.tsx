@@ -13,10 +13,10 @@ export default function AccompCoursePage() {
   const router = useRouter();
   const [showUpload, setShowUpload] = useState(false);
 
-  if (user?.plan !== "PREMIUM") {
-    router.replace("/error/403");
-    return null;
-  }
+  // if (user?.plan !== "PREMIUM") {
+  //   router.replace("/error/403");
+  //   return null;
+  // }
 
   const sections = [
     {
@@ -65,7 +65,7 @@ export default function AccompCoursePage() {
       <h1 className="text-3xl font-bold text-darkblue mb-6">
         Curso Piano Acompañamientos
       </h1>
-
+      <img src="/logo-acompanamientos.png" alt="Logo piano aconpanamientos" className="w-full"/>
       <CourseAccordion sections={sections} />
 
       <Button

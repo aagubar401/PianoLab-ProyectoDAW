@@ -13,10 +13,10 @@ export default function ScoresCoursePage() {
   const router = useRouter();
   const [showUpload, setShowUpload] = useState(false);
 
-  if (user?.plan !== "PREMIUM") {
-    router.replace("/error/403");
-    return null;
-  }
+  // if (user?.plan !== "PREMIUM") {
+  //   router.replace("/error/403");
+  //   return null;
+  // }
 
   const sections = [
     {
@@ -69,7 +69,7 @@ export default function ScoresCoursePage() {
       <h1 className="text-3xl font-bold text-darkblue mb-6">
         Curso Piano Partituras
       </h1>
-
+      <img src="/logo-partituras.png" alt="Logo piano partituras" className="w-full"/>
       <CourseAccordion sections={sections} />
 
       <Button

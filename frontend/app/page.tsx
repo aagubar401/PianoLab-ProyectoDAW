@@ -19,6 +19,7 @@ export default function HomePage() {
         <h1 className="text-4xl md:text-5xl font-bold text-darkblue">
           Bienvenido a <span className="text-primary">PianoLab</span>
         </h1>
+        <img src="/logo.png" alt="Logo PianoLab" className="w-100"/>
         <p className="text-gray-700 text-sm md:text-base leading-relaxed">
           Aprende piano desde cero o mejora tu técnica con nuestros cursos
           estructurados: Piano Básico, Acompañamientos y Partituras. Accede a
@@ -39,7 +40,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div className="hidden md:block">
+      <div className="block">
         <div className="bg-white rounded-2xl shadow-card p-6 border border-gray-100">
           <h2 className="text-lg font-semibold text-gray-800 mb-4">
             ¿Qué encontrarás en PianoLab?

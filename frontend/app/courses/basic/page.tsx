@@ -62,7 +62,7 @@ export default function BasicCoursePage() {
       <h1 className="text-3xl font-bold text-darkblue mb-6">
         Curso Piano Básico
       </h1>
-
+      <img src="/logo-basico.png" alt="Logo piano básico" className="w-full"/>
       <CourseAccordion sections={sections} />
 
       <Button
