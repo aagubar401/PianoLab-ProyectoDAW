@@ -3,7 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { sequelize } from "./database";
 import "./models/User";
-import chordsRoute from "./routes/chords";
+import lyricsRoute from "./routes/lyrics";
 
 dotenv.config();
 
@@ -11,7 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/lyrics", chordsRoute);
+app.use("/lyrics", lyricsRoute);
 
 sequelize.sync().then(() => {
   console.log("Base de datos sincronizada");
