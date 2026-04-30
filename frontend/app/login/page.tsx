@@ -9,6 +9,7 @@ import { useAuth } from "../../lib/useAuth";
 export default function LoginPage() {
   const router = useRouter();
   const { login } = useAuth();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -18,11 +19,12 @@ export default function LoginPage() {
     e.preventDefault();
     setError(null);
     setLoading(true);
+
     try {
       await login({ email, password });
       router.push("/courses");
-    } catch {
-      setError("Error al iniciar sesión. Inténtalo de nuevo.");
+    } catch (err: any) {
+      setError(err.message || "Error al iniciar sesión. Inténtalo de nuevo.");
     } finally {
       setLoading(false);
     }
@@ -45,6 +47,7 @@ export default function LoginPage() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+
         <Input
           label="Contraseña"
           type="password"

@@ -1,4 +1,3 @@
-
 services:
   postgres:
     image: postgres:16
@@ -13,7 +12,7 @@ services:
       - pgdata:/var/lib/postgresql/data
     networks:
       - piano-net
-
+  
   backend:
     build: ./backend
     container_name: piano-backend
@@ -42,6 +41,20 @@ services:
       NEXT_PUBLIC_BACKEND_URL: http://backend:4000
     ports:
       - "3000:3000"
+    networks:
+      - piano-net
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin-elearning
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5052:80"
+    depends_on:
+      - postgres
     networks:
       - piano-net
 

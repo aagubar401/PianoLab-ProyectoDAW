@@ -1,4 +1,5 @@
 // frontend/lib/api.ts
+import type { User } from "./authTypes";
 
 const API_BASE =
   process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
@@ -27,4 +28,8 @@ export async function apiPost<T>(
     throw new Error(`Error POST ${path}: ${res.status}`);
   }
   return res.json();
+}
+
+export async function upgradeUserToPremium(userId: number): Promise<{ user: User }> {
+  return apiPost("/auth/upgrade", { userId });
 }

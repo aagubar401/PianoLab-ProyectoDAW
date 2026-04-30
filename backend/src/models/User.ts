@@ -1,10 +1,41 @@
-import { DataTypes, Model } from "sequelize";
+import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../database";
 
-export class User extends Model {}
+interface UserAttributes {
+  id: number;
+  fullname: string;
+  username: string;
+  email: string;
+  password: string;
+  logo?: string | null;
+  premium: boolean;
+}
+
+type UserCreationAttributes = Optional<UserAttributes, "id" | "logo" | "premium">;
+
+export class User
+  extends Model<UserAttributes, UserCreationAttributes>
+  implements UserAttributes
+{
+  public id!: number;
+  public fullname!: string;
+  public username!: string;
+  public email!: string;
+  public password!: string;
+  public logo!: string | null;
+  public premium!: boolean;
+
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
+}
 
 User.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
     fullname: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -18,7 +49,9 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
-      validate: { isEmail: true },
+      validate: {
+        isEmail: true,
+      },
     },
     password: {
       type: DataTypes.STRING,
@@ -30,6 +63,7 @@ User.init(
     },
     premium: {
       type: DataTypes.BOOLEAN,
+      allowNull: false,
       defaultValue: false,
     },
   },
@@ -37,5 +71,6 @@ User.init(
     sequelize,
     modelName: "User",
     tableName: "Users",
+    timestamps: true,
   }
 );

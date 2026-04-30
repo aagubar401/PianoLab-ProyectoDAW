@@ -18,17 +18,17 @@ export default function Navbar() {
   return (
     <nav className="w-full bg-white shadow-sm">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+
         {/* Logo */}
         <button
           onClick={() => router.push("/")}
           className="flex items-center gap-2"
         >
-
-
-            
-            <img src="/logo.png" alt="Logo PianoLab" className="h-20"/>
-
-
+          <img
+            src="/logo.png"
+            alt="Logo PianoLab"
+            className="h-14 md:h-20"
+          />
         </button>
 
         {/* Desktop menu */}
@@ -36,9 +36,11 @@ export default function Navbar() {
           <Link href="/support" className={isActive("/support")}>
             Atención al cliente
           </Link>
+
           <Link href="/payments" className={isActive("/payments")}>
             Pagos
           </Link>
+
           <Link href="/courses" className={isActive("/courses")}>
             Cursos
           </Link>
@@ -52,11 +54,29 @@ export default function Navbar() {
                 onClick={() => router.push("/user")}
                 className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-100 hover:bg-gray-200 transition"
               >
-                <div className="w-7 h-7 rounded-full bg-darkblue text-black flex items-center justify-center text-xs">
-                  {user.username.charAt(0).toUpperCase()}
+                <div className="relative">
+                  <div className="w-7 h-7 rounded-full bg-darkblue text-white flex items-center justify-center text-xs">
+                    {user.username.charAt(0).toUpperCase()}
+                  </div>
+
+                  {/* ⭐ BADGE PREMIUM */}
+                  {user.premium && (
+                    <span className="absolute -top-1 -right-1 text-[10px] bg-yellow-400 text-black rounded-full px-1.5 py-0.5 shadow">
+                      ⭐
+                    </span>
+                  )}
                 </div>
-                <span className="text-sm text-gray-800">{user.username}</span>
+
+                <span className="text-sm text-gray-800 flex items-center gap-1">
+                  {user.username}
+                  {user.premium && (
+                    <span className="text-yellow-500 font-semibold text-xs">
+                      Premium
+                    </span>
+                  )}
+                </span>
               </button>
+
               <button
                 onClick={logout}
                 className="text-xs text-gray-500 hover:text-gray-700"
@@ -67,7 +87,7 @@ export default function Navbar() {
           ) : (
             <button
               onClick={() => router.push("/login")}
-              className="px-4 py-2 rounded-full bg-darkblue text-black text-sm hover:bg-primary transition"
+              className="px-4 py-2 rounded-full bg-darkblue text-white text-sm hover:bg-blue-700 transition"
             >
               Iniciar sesión
             </button>
@@ -79,10 +99,7 @@ export default function Navbar() {
           className="md:hidden flex flex-col gap-1"
           onClick={() => setOpen(!open)}
         >
-
-            <img src="/icons8-menu.svg" alt="hamburger" className="w-10 h-10"/>
-
-
+          <img src="/icons8-menu.svg" alt="hamburger" className="w-10 h-10" />
         </button>
       </div>
 
@@ -121,10 +138,16 @@ export default function Navbar() {
                     router.push("/user");
                     setOpen(false);
                   }}
-                  className="block w-full text-left text-gray-800 py-1"
+                  className="block w-full text-left text-gray-800 py-1 flex items-center gap-2"
                 >
                   Mi cuenta
+                  {user.premium && (
+                    <span className="text-yellow-500 text-xs font-semibold">
+                      ⭐ Premium
+                    </span>
+                  )}
                 </button>
+
                 <button
                   onClick={() => {
                     logout();
@@ -141,7 +164,7 @@ export default function Navbar() {
                   router.push("/login");
                   setOpen(false);
                 }}
-                className="block w-full text-left text-darkblue py-1"
+                className="block w-full text-left text-darkblue font-semibold py-1 hover:text-blue-700"
               >
                 Iniciar sesión
               </button>

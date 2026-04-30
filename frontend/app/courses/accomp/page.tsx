@@ -1,17 +1,12 @@
 "use client";
 
-import ProtectedRoute from "../../../components/ProtectedRoute";
+import PremiumRoute from "../../../components/PremiumRoute";
 import CourseAccordion from "../../../components/CourseAccordion";
 import UserVideoCard from "../../../components/UserVideoCard";
 import Button from "../../../components/Button";
-import { useAuth } from "../../../lib/useAuth";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function AccompCoursePage() {
-  const { user } = useAuth();
-  const router = useRouter();
-
   const [showUpload, setShowUpload] = useState(false);
 
   // Estados para letras
@@ -88,7 +83,7 @@ export default function AccompCoursePage() {
       } else {
         setLyrics(data.lyrics);
       }
-    } catch (err) {
+    } catch {
       setError("Error al conectar con el servidor.");
     }
 
@@ -96,7 +91,7 @@ export default function AccompCoursePage() {
   };
 
   return (
-    <ProtectedRoute>
+    <PremiumRoute>
       <h1 className="text-3xl font-bold text-darkblue mb-6">
         Curso Piano Acompañamientos
       </h1>
@@ -157,15 +152,18 @@ export default function AccompCoursePage() {
       {showUpload && (
         <div className="mt-4 bg-white p-4 rounded-xl shadow-card border border-gray-100">
           <p className="text-sm text-gray-700 mb-2">Subir vídeo</p>
+
           <input type="file" accept="video/*" className="text-sm" />
+
           <input
             type="text"
             placeholder="Título del vídeo"
             className="mt-2 w-full border rounded-lg px-3 py-2 text-sm"
           />
+
           <Button className="mt-3 w-full">Subir</Button>
         </div>
       )}
-    </ProtectedRoute>
+    </PremiumRoute>
   );
 }

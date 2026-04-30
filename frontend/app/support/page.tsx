@@ -12,12 +12,17 @@ export default function SupportPage() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    setSent(true);
+    setSent(false);
 
     const payload = { name, email, message };
     console.log("Mensaje enviado al backend (mock):", payload);
+
     // Aquí en el futuro: apiPost("/support", payload)
-    alert("Mensaje enviado correctamente.");
+
+    setSent(true);
+    setName("");
+    setEmail("");
+    setMessage("");
   };
 
   return (
@@ -36,6 +41,7 @@ export default function SupportPage() {
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
+
         <Input
           label="Correo electrónico"
           type="email"
@@ -43,6 +49,7 @@ export default function SupportPage() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+
         <div className="flex flex-col gap-1">
           <label className="text-sm font-medium text-gray-700">
             Mensaje

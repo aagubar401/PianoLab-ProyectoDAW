@@ -1,25 +1,24 @@
 type Plan = "BASIC" | "PREMIUM";
 
 type User = {
-  id: string;
-  name: string;
+  id: number;
+  fullname: string;
   username: string;
   email: string;
-  plan: Plan;
+  premium: boolean; // equivale a tu plan
 };
 
 type AuthContextType = {
   user: User | null;
-  loading: boolean;
+  loadingUser: boolean;
   login: (data: { email: string; password: string }) => Promise<void>;
   register: (data: {
-    name: string;
+    fullname: string;
     username: string;
     email: string;
     password: string;
   }) => Promise<void>;
   logout: () => void;
-  setPlan: (plan: Plan) => void;
 };
 
-export type {Plan, User, AuthContextType}
+export type { Plan, User, AuthContextType };

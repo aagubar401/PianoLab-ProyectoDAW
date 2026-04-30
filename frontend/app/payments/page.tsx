@@ -3,9 +3,27 @@
 import ProtectedRoute from "../../components/ProtectedRoute";
 import { useAuth } from "../../lib/useAuth";
 import Button from "../../components/Button";
+import { upgradeUserToPremium } from "../../lib/api";
 
 export default function PaymentsPage() {
-  const { user, setPlan } = useAuth();
+  const { user } = useAuth();
+
+  const handleUpgrade = async () => {
+    if (!user) return;
+
+    const res = await upgradeUserToPremium(Number(user.id)); // 🔥 FIX
+
+    localStorage.setItem("pianolab_user", JSON.stringify(res.user));
+    window.location.reload();
+  };
+
+  const handleDowngrade = () => {
+    if (!user) return;
+
+    const updatedUser = { ...user, premium: false };
+    localStorage.setItem("pianolab_user", JSON.stringify(updatedUser));
+    window.location.reload();
+  };
 
   return (
     <ProtectedRoute>
@@ -22,7 +40,7 @@ export default function PaymentsPage() {
           </p>
           <p className="text-2xl font-bold text-darkblue mt-4">Gratis</p>
 
-          {user?.plan === "BASIC" ? (
+          {user?.premium === false ? (
             <p className="mt-4 text-sm text-green-600 font-medium">
               ✔ Este es tu plan actual
             </p>
@@ -30,7 +48,7 @@ export default function PaymentsPage() {
             <Button
               variant="secondary"
               className="mt-4 w-full"
-              onClick={() => setPlan("BASIC")}
+              onClick={handleDowngrade}
             >
               Cambiar a Básico
             </Button>
@@ -45,14 +63,14 @@ export default function PaymentsPage() {
           </p>
           <p className="text-2xl font-bold text-darkblue mt-4">30€</p>
 
-          {user?.plan === "PREMIUM" ? (
+          {user?.premium === true ? (
             <p className="mt-4 text-sm text-green-600 font-medium">
               ✔ Este es tu plan actual
             </p>
           ) : (
             <Button
               className="mt-4 w-full"
-              onClick={() => setPlan("PREMIUM")}
+              onClick={handleUpgrade}
             >
               Comprar Premium
             </Button>

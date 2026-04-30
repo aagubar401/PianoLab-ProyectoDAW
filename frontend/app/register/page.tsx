@@ -10,7 +10,7 @@ export default function RegisterPage() {
   const router = useRouter();
   const { register } = useAuth();
 
-  const [name, setName] = useState("");
+  const [fullname, setFullname] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,11 +30,10 @@ export default function RegisterPage() {
 
     setLoading(true);
     try {
-      await register({ name, username, email, password });
-      // El logo se enviará al backend en el futuro
+      await register({ fullname, username, email, password });
       router.push("/courses");
-    } catch {
-      setError("Error al registrar el usuario. Inténtalo de nuevo.");
+    } catch (err: any) {
+      setError(err.message || "Error al registrar el usuario. Inténtalo de nuevo.");
     } finally {
       setLoading(false);
     }
@@ -53,15 +52,17 @@ export default function RegisterPage() {
         <Input
           label="Nombre y apellidos"
           required
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={fullname}
+          onChange={(e) => setFullname(e.target.value)}
         />
+
         <Input
           label="Nombre de usuario"
           required
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
+
         <Input
           label="Correo electrónico"
           type="email"
@@ -69,6 +70,7 @@ export default function RegisterPage() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+
         <Input
           label="Contraseña"
           type="password"
@@ -76,6 +78,7 @@ export default function RegisterPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+
         <Input
           label="Repetir contraseña"
           type="password"
@@ -83,6 +86,7 @@ export default function RegisterPage() {
           value={repeatPassword}
           onChange={(e) => setRepeatPassword(e.target.value)}
         />
+
         <div>
           <label className="text-sm font-medium text-gray-700">
             Logo de usuario (png o jpg)

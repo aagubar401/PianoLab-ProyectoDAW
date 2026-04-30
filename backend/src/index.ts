@@ -4,14 +4,22 @@ import dotenv from "dotenv";
 import { sequelize } from "./database";
 import "./models/User";
 import lyricsRoute from "./routes/lyrics";
+import authRoutes from "./routes/auth";
 
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
 app.use("/lyrics", lyricsRoute);
+app.use("/auth", authRoutes);
 
 sequelize.sync().then(() => {
   console.log("Base de datos sincronizada");

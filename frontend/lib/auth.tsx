@@ -1,25 +1,24 @@
 "use client";
-import {User, Plan} from "./authTypes";
+
+import { useEffect, useState, ReactNode } from "react";
 import { AuthContext } from "./AuthContext";
-import {
-  useEffect,
-  useState,
-  ReactNode,
-} from "react";
+import { User, AuthContextType } from "./authTypes";
+
 type AuthProviderProps = {
   children: ReactNode;
 };
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loadingUser, setLoadingUser] = useState(true);
 
   // Cargar usuario desde localStorage
   useEffect(() => {
     const stored = localStorage.getItem("pianolab_user");
-    if (stored) setUser(JSON.parse(stored));
-    setLoading(false);
+    if (stored) {
+      setUser(JSON.parse(stored));
+    }
+    setLoadingUser(false);
   }, []);
 
   const persist = (u: User | null) => {
@@ -27,56 +26,59 @@ export function AuthProvider({ children }: AuthProviderProps) {
     else localStorage.removeItem("pianolab_user");
   };
 
-  const login = async ({ email }: { email: string; password: string }) => {
-    const mockUser: User = {
-      id: "1",
-      name: "Usuario Demo",
-      username: "demoUser",
-      email,
-      plan: "BASIC",
-    };
-    setUser(mockUser);
-    persist(mockUser);
+  // 🔥 LOGIN REAL
+  const login: AuthContextType["login"] = async ({ email, password }) => {
+    const res = await fetch("http://localhost:4000/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+
+    const loggedUser: User = data.user;
+
+    setUser(loggedUser);
+    persist(loggedUser);
+    localStorage.setItem("token", data.token);
   };
 
-  const register = async ({
-    name,
+  // 🔥 REGISTER REAL
+  const register: AuthContextType["register"] = async ({
+    fullname,
     username,
     email,
-  }: {
-    name: string;
-    username: string;
-    email: string;
-    password: string;
+    password,
   }) => {
-    const mockUser: User = {
-      id: "1",
-      name,
-      username,
-      email,
-      plan: "BASIC",
-    };
-    setUser(mockUser);
-    persist(mockUser);
+    const res = await fetch("http://localhost:4000/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ fullname, username, email, password }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
   };
 
+  // 🔥 LOGOUT
   const logout = () => {
     setUser(null);
     persist(null);
+    localStorage.removeItem("token");
   };
 
-  const setPlan = (plan: Plan) => {
-    if (!user) return;
-    const updated = { ...user, plan };
-    setUser(updated);
-    persist(updated);
+  const contextValue: AuthContextType = {
+    user,
+    loadingUser,
+    login,
+    register,
+    logout,
   };
-  const [context, setContext] = useState({ user, loading, login, register, logout, setPlan })
+
   return (
-    <AuthContext.Provider value={context}>
+    <AuthContext.Provider value={contextValue}>
       {children}
     </AuthContext.Provider>
   );
 }
-
-
