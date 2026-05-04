@@ -3,7 +3,7 @@
 import ProtectedRoute from "../../components/ProtectedRoute";
 import { useAuth } from "../../lib/useAuth";
 import Button from "../../components/Button";
-import { upgradeUserToPremium } from "../../lib/api";
+import { upgradeUserToPremium, downgradeUserToBasic } from "../../lib/api";
 
 export default function PaymentsPage() {
   const { user } = useAuth();
@@ -11,17 +11,18 @@ export default function PaymentsPage() {
   const handleUpgrade = async () => {
     if (!user) return;
 
-    const res = await upgradeUserToPremium(Number(user.id)); // 🔥 FIX
+    const res = await upgradeUserToPremium(Number(user.id));
 
     localStorage.setItem("pianolab_user", JSON.stringify(res.user));
     window.location.reload();
   };
 
-  const handleDowngrade = () => {
+  const handleDowngrade = async () => {
     if (!user) return;
 
-    const updatedUser = { ...user, premium: false };
-    localStorage.setItem("pianolab_user", JSON.stringify(updatedUser));
+    const res = await downgradeUserToBasic(Number(user.id));
+
+    localStorage.setItem("pianolab_user", JSON.stringify(res.user));
     window.location.reload();
   };
 

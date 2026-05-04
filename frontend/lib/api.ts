@@ -33,3 +33,7 @@ export async function apiPost<T>(
 export async function upgradeUserToPremium(userId: number): Promise<{ user: User }> {
   return apiPost("/auth/upgrade", { userId });
 }
+
+export async function downgradeUserToBasic(userId: number): Promise<{ user: User }> {
+  return apiPost("/auth/downgrade", { userId });
+}

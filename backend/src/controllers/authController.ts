@@ -108,3 +108,39 @@ export const upgradeToPremium = async (req: Request, res: Response) => {
     return res.status(500).json({ error: "Error al actualizar a Premium" });
   }
 };
+
+
+export const downgradeToBasic = async (req: Request, res: Response) => {
+  try {
+    console.log("🔥 LLEGÓ PETICIÓN A /auth/downgrade:", req.body);
+
+    const { userId } = req.body;
+
+    if (!userId) {
+      return res.status(400).json({ error: "Falta userId" });
+    }
+
+    const user = await User.findByPk(userId);
+
+    if (!user) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+
+    user.premium = false;
+    await user.save();
+
+    return res.json({
+      message: "Usuario actualizado a Básico",
+      user: {
+        id: user.id,
+        fullname: user.fullname,
+        username: user.username,
+        email: user.email,
+        premium: user.premium,
+      },
+    });
+  } catch (err) {
+    console.error("ERROR EN /auth/downgrade:", err);
+    return res.status(500).json({ error: "Error al actualizar a Básico" });
+  }
+};
