@@ -87,10 +87,11 @@ export default function Navbar() {
           ) : (
             <button
               onClick={() => router.push("/login")}
-              className="px-4 py-2 rounded-full bg-darkblue text-white text-sm hover:bg-blue-700 transition"
-            >
-              Iniciar sesión
+                className="px-4 py-2 rounded-full bg-blue-600 text-white text-sm hover:bg-blue-700 transition"
+>
+               Iniciar sesión
             </button>
+
           )}
         </div>
 

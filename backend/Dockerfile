@@ -30,16 +30,13 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
+RUN npm install -g nodemon
+
 COPY . .
 
-RUN npm run build
-
-# Puppeteer necesita saber dónde está Chromium
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
-
 ENV GENIUS_API_KEY=bP2FfC7tuaH8et0qDqVPQtKBT5dnBmgM3nvRAYucefs_Pq4-cGW6_AC4c2lz6uT3
-
 
 EXPOSE 4000
 
-CMD ["npm", "start"]
+CMD ["nodemon", "src/index.ts"]

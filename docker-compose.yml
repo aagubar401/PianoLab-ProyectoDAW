@@ -28,6 +28,10 @@ services:
       PORT: 4000
     ports:
       - "4000:4000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    command: ["nodemon", "src/index.ts"]   # 🔥 FIX CRÍTICO
     networks:
       - piano-net
 
@@ -41,6 +45,10 @@ services:
       NEXT_PUBLIC_BACKEND_URL: http://backend:4000
     ports:
       - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: ["npm", "run", "dev"]         # 🔥 Asegura hot reload
     networks:
       - piano-net
 
