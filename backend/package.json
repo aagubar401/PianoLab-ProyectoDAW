@@ -23,6 +23,7 @@
     "express-validator": "^7.3.2",
     "genius-lyrics": "^4.4.7",
     "jsonwebtoken": "^9.0.3",
+    "nodemailer": "^8.0.7",
     "pg": "^8.20.0",
     "pg-hstore": "^2.3.4",
     "puppeteer": "^24.42.0",
@@ -34,6 +35,7 @@
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.6.0",
+    "@types/nodemailer": "^8.0.0",
     "nodemon": "^3.1.14",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.3"

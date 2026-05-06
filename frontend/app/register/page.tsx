@@ -15,7 +15,7 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
-  const [logo, setLogo] = useState<File | null>(null);
+
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -87,17 +87,7 @@ export default function RegisterPage() {
           onChange={(e) => setRepeatPassword(e.target.value)}
         />
 
-        <div>
-          <label className="text-sm font-medium text-gray-700">
-            Logo de usuario (png o jpg)
-          </label>
-          <input
-            type="file"
-            accept="image/png,image/jpeg"
-            className="mt-1 block w-full text-xs text-gray-600"
-            onChange={(e) => setLogo(e.target.files?.[0] ?? null)}
-          />
-        </div>
+        
 
         {error && (
           <p className="text-xs text-red-500 bg-red-50 border border-red-100 rounded-lg px-3 py-2">

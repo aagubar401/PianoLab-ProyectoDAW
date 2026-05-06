@@ -63,12 +63,15 @@ services:
       - "5052:80"
     depends_on:
       - postgres
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin   # 🔥 FIX
     networks:
       - piano-net
 
 volumes:
   pgdata:
-
+  pgadmin_data:   # 🔥 FIX
+  
 networks:
   piano-net:
     driver: bridge

@@ -5,7 +5,7 @@ import { sequelize } from "./database";
 import "./models/User";
 import lyricsRoute from "./routes/lyrics";
 import authRoutes from "./routes/auth";
-
+import supportRoutes from "./routes/support";
 dotenv.config();
 
 const app = express();
@@ -20,7 +20,7 @@ app.use(express.json());
 
 app.use("/lyrics", lyricsRoute);
 app.use("/auth", authRoutes);
-
+app.use("/support", supportRoutes);
 sequelize.sync().then(() => {
   console.log("Base de datos sincronizada");
   app.listen(process.env.PORT, () => {

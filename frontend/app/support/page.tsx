@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
+import { sendSupportMessage } from "../../lib/api";
 
 export default function SupportPage() {
   const [name, setName] = useState("");
@@ -10,20 +11,23 @@ export default function SupportPage() {
   const [message, setMessage] = useState("");
   const [sent, setSent] = useState(false);
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    setSent(false);
+  const handleSubmit = async (e: FormEvent) => {
+  e.preventDefault();
+  setSent(false);
 
-    const payload = { name, email, message };
-    console.log("Mensaje enviado al backend (mock):", payload);
+  const payload = { name, email, message };
 
-    // Aquí en el futuro: apiPost("/support", payload)
-
+  try {
+    await sendSupportMessage(payload);
     setSent(true);
     setName("");
     setEmail("");
     setMessage("");
-  };
+  } catch (err) {
+    console.error("Error enviando soporte:", err);
+    alert("Hubo un error enviando tu mensaje.");
+  }
+};
 
   return (
     <div className="max-w-lg mx-auto bg-white rounded-2xl shadow-card border border-gray-100 p-6">

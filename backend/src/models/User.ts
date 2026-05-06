@@ -7,11 +7,10 @@ interface UserAttributes {
   username: string;
   email: string;
   password: string;
-  logo?: string | null;
   premium: boolean;
 }
 
-type UserCreationAttributes = Optional<UserAttributes, "id" | "logo" | "premium">;
+type UserCreationAttributes = Optional<UserAttributes, "id" | "premium">;
 
 export class User
   extends Model<UserAttributes, UserCreationAttributes>
@@ -22,7 +21,6 @@ export class User
   public username!: string;
   public email!: string;
   public password!: string;
-  public logo!: string | null;
   public premium!: boolean;
 
   public readonly createdAt!: Date;
@@ -56,10 +54,6 @@ User.init(
     password: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    logo: {
-      type: DataTypes.STRING,
-      allowNull: true,
     },
     premium: {
       type: DataTypes.BOOLEAN,
