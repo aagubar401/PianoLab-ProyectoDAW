@@ -19,22 +19,38 @@ export default function AccompCoursePage() {
   const sections = [
     {
       id: "temario",
-      title: "Temario (PDF)",
+      title: "Teoría del curso (PDF)",
       content: (
         <a
-          href="/pdfs/curso-acomp.pdf"
+          href="/courses/pdfs/acompanamientos_teoria.pdf"
           target="_blank"
           className="text-primary underline"
         >
-          Descargar PDF del curso
+          Ver teoría del curso (PDF)
         </a>
       ),
     },
+
     {
       id: "videos",
       title: "Vídeos del curso",
-      content: <p>Vídeos oficiales del curso (pendiente de añadir).</p>,
+      content: (
+        <div className="space-y-4">
+          <video
+            src="/courses/videos/acompanamientos/acordes.mp4"
+            controls
+            className="w-full rounded-xl shadow"
+          />
+
+          <video
+            src="/courses/videos/acompanamientos/pedal.mp4"
+            controls
+            className="w-full rounded-xl shadow"
+          />
+        </div>
+      ),
     },
+
     {
       id: "partituras",
       title: "Partituras",
@@ -44,6 +60,7 @@ export default function AccompCoursePage() {
         </p>
       ),
     },
+
     {
       id: "usuarios",
       title: "Vídeos de usuarios",

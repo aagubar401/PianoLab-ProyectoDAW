@@ -12,35 +12,56 @@ export default function BasicCoursePage() {
   const sections = [
     {
       id: "temario",
-      title: "Temario (PDF)",
+      title: "Teoría del curso (PDF)",
       content: (
         <a
-          href="/pdfs/curso-basico.pdf"
+          href="/courses/pdfs/basico_teoria.pdf"
           target="_blank"
           className="text-primary underline"
         >
-          Descargar PDF del curso
+          Ver teoría del curso (PDF)
         </a>
       ),
     },
+
     {
       id: "videos",
       title: "Vídeos del curso",
-      content: <p>Vídeos oficiales del curso (pendiente de añadir).</p>,
-    },
-    {
-      id: "partituras",
-      title: "Partituras",
       content: (
-        <a
-          href="/pdfs/partituras-basico.pdf"
-          target="_blank"
-          className="text-primary underline"
-        >
-          Descargar partituras
-        </a>
+        <div className="space-y-4">
+          <video
+            src="/courses/videos/basico/sentarse_al_piano_y_notas.mp4"
+            controls
+            className="w-full rounded-xl shadow"
+          />
+
+          <video
+            src="/courses/videos/basico/cumpleanos_feliz.mp4"
+            controls
+            className="w-full rounded-xl shadow"
+          />
+        </div>
       ),
     },
+
+    {
+      id: "partituras",
+      title: "Partituras del curso",
+      content: (
+        <div className="flex flex-col gap-2">
+          <a
+            href="/courses/pdfs/partituras/cumpleanos_feliz.pdf"
+            target="_blank"
+            className="text-primary underline"
+          >
+            Cumpleaños Feliz (PDF)
+          </a>
+
+          
+        </div>
+      ),
+    },
+
     {
       id: "usuarios",
       title: "Vídeos de usuarios",

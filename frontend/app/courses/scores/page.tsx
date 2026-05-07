@@ -12,35 +12,76 @@ export default function ScoresCoursePage() {
   const sections = [
     {
       id: "temario",
-      title: "Temario (PDF)",
+      title: "Teoría del curso (PDF)",
       content: (
         <a
-          href="/pdfs/curso-partituras.pdf"
+          href="/courses/pdfs/partituras_teoria.pdf"
           target="_blank"
           className="text-primary underline"
         >
-          Descargar PDF del curso
+          Ver teoría del curso (PDF)
         </a>
       ),
     },
+
     {
       id: "videos",
       title: "Vídeos del curso",
-      content: <p>Vídeos oficiales del curso (pendiente de añadir).</p>,
-    },
-    {
-      id: "partituras",
-      title: "Partituras",
       content: (
-        <a
-          href="/pdfs/partituras-partituras.pdf"
-          target="_blank"
-          className="text-primary underline"
-        >
-          Descargar partituras
-        </a>
+        <div className="space-y-4">
+          <video
+            src="/courses/videos/partituras/compases.mp4"
+            controls
+            className="w-full rounded-xl shadow"
+          />
+
+          <video
+            src="/courses/videos/partituras/curso_musescore.mp4"
+            controls
+            className="w-full rounded-xl shadow"
+          />
+
+          <video
+            src="/courses/videos/partituras/identificar_notas.mp4"
+            controls
+            className="w-full rounded-xl shadow"
+          />
+        </div>
       ),
     },
+
+    {
+      id: "partituras",
+      title: "Partituras del curso",
+      content: (
+        <div className="flex flex-col gap-2">
+          <a
+            href="/courses/pdfs/partituras/himno_a_la_alegria.pdf"
+            target="_blank"
+            className="text-primary underline"
+          >
+            Himno a la Alegría (PDF)
+          </a>
+
+          <a
+            href="/courses/pdfs/partituras/himno_a_la_alegria_con_acordes.pdf"
+            target="_blank"
+            className="text-primary underline"
+          >
+            Himno a la Alegría (con acordes) (PDF)
+          </a>
+
+          <a
+            href="/courses/pdfs/partituras/nuvole_bianche.pdf"
+            target="_blank"
+            className="text-primary underline"
+          >
+            Nuvole Bianche (PDF)
+          </a>
+        </div>
+      ),
+    },
+
     {
       id: "usuarios",
       title: "Vídeos de usuarios",
