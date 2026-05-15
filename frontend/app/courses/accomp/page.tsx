@@ -2,13 +2,13 @@
 
 import PremiumRoute from "../../../components/PremiumRoute";
 import CourseAccordion from "../../../components/CourseAccordion";
-import UserVideoCard from "../../../components/UserVideoCard";
 import Button from "../../../components/Button";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function AccompCoursePage() {
   const [showUpload, setShowUpload] = useState(false);
-
+  const router = useRouter();
   // Estados para letras
   const [artist, setArtist] = useState("");
   const [song, setSong] = useState("");
@@ -64,14 +64,9 @@ export default function AccompCoursePage() {
     {
       id: "usuarios",
       title: "Vídeos de usuarios",
-      content: (
-        <UserVideoCard
-          title="Acompañamiento básico"
-          author="demoUser"
-          likes={5}
-          dislikes={1}
-        />
-      ),
+      content: <div className="space-y-4">
+          <p>Función no disponible todavía. Se añadirá en una futura actualización.</p>
+        </div>
     },
   ];
 
@@ -156,31 +151,16 @@ export default function AccompCoursePage() {
           </div>
         )}
       </div>
-
-      {/* SUBIR VIDEO */}
-      <Button
-        className="mt-6"
-        variant="secondary"
-        onClick={() => setShowUpload(!showUpload)}
-      >
-        Publicar vídeo
-      </Button>
-
-      {showUpload && (
-        <div className="mt-4 bg-white p-4 rounded-xl shadow-card border border-gray-100">
-          <p className="text-sm text-gray-700 mb-2">Subir vídeo</p>
-
-          <input type="file" accept="video/*" className="text-sm" />
-
-          <input
-            type="text"
-            placeholder="Título del vídeo"
-            className="mt-2 w-full border rounded-lg px-3 py-2 text-sm"
-          />
-
-          <Button className="mt-3 w-full">Subir</Button>
-        </div>
-      )}
+      <div className="mt-10 flex justify-center">
+              <Button
+                variant="secondary"
+                className="px-6 py-2"
+                onClick={() => router.push("/courses")}
+              >
+                Volver a cursos
+              </Button>
+            </div>
+      
     </PremiumRoute>
   );
 }

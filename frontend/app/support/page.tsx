@@ -72,8 +72,7 @@ export default function SupportPage() {
 
         {sent && (
           <p className="text-xs text-green-600 mt-2">
-            Tu mensaje ha sido enviado (simulado). Se ha enviado un objeto
-            al backend con los datos del formulario.
+            Tu mensaje ha sido enviado al correo corporativo del curso. En un tiempo recibirás tu respuesta.
           </p>
         )}
       </form>
