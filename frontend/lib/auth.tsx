@@ -61,6 +61,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     if (!res.ok) throw new Error(data.error);
   };
 
+  
   // 🔥 LOGOUT
   const logout = () => {
     setUser(null);
